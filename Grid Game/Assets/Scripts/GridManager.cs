@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    public event Action<GridTile> TileSelected;
+    
     public int numRows = 5;
 
     public int numColumns = 6;
@@ -45,5 +47,10 @@ public class GridManager : MonoBehaviour
     public void OnTileHoverExit(GridTile gridTile)
     {
         text.text = "(-,-)";
+    }
+    
+    public void OnTileSelected(GridTile gridTile)
+    {
+        TileSelected?.Invoke(gridTile);
     }
 }
