@@ -711,6 +711,7 @@ GameObject:
   - component: {fileID: 1332590798}
   - component: {fileID: 1332590797}
   - component: {fileID: 1332590796}
+  - component: {fileID: 1332590800}
   m_Layer: 5
   m_Name: Start Game Button
   m_TagString: Untagged
@@ -750,6 +751,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce711330e644caf47904ce31394b6d43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchScene: {fileID: 1332590800}
+  scoreScript: {fileID: 1490186672}
   gridManager: {fileID: 1490186670}
   scoreText: {fileID: 1139036604}
   highScoreText: {fileID: 1530899200}
@@ -849,6 +852,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332590794}
   m_CullTransparentMesh: 1
+--- !u!114 &1332590800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332590794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d856458a204434809aa31b22b892a640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1482038581
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,7 +900,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.3532396, g: 0.8333137, b: 0.9245283, a: 0}
+  m_BackGroundColor: {r: 0, g: 0.21176471, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -951,6 +966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1490186671}
   - component: {fileID: 1490186670}
+  - component: {fileID: 1490186672}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -990,6 +1006,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1490186672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490186669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9a634b5c08eb9429bf597d8448de07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1139036604}
+  highScoreText: {fileID: 1530899200}
 --- !u!1 &1530899198
 GameObject:
   m_ObjectHideFlags: 0
