@@ -1,15 +1,35 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SimonSays : MonoBehaviour
 {
     [SerializeField] private GridManager gridManager;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
 
     private List<Vector2Int> correctPosition  = new List<Vector2Int>();
 
     private bool PatternPlaying;
     private int playerPatternIndex;
+    public int score;
+    public int highScore;
+
+    private void Awake()
+    {
+        score = 0;
+        scoreText.text = "Score: " + score.ToString();
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("High Score",  highScore).ToString();
+
+    }
+
+    private void Update()
+    {
+        scoreText.text = "Score: " + score.ToString();
+    }
 
     private void OnEnable()
     {
@@ -31,11 +51,18 @@ public class SimonSays : MonoBehaviour
         if (gridTile.gridCoordinates == correctPosition[playerPatternIndex])
         {
             Debug.Log("Correct");
+            scoreText.text = "Score: " + score.ToString();
             StartCoroutine(Co_FlashTile(gridTile, Color.green, 0.25f));
             playerPatternIndex++;
             if (playerPatternIndex == correctPosition.Count)
             {
                 NextPattern();
+                score++;
+                if (score > PlayerPrefs.GetInt("High Score", 0))
+                {
+                    PlayerPrefs.SetInt("High Score", score);
+                    highScoreText.text = "High Score: " + score.ToString();
+                }
             }
         }
         else
@@ -43,7 +70,8 @@ public class SimonSays : MonoBehaviour
             Debug.Log("Wrong");
             StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
             correctPosition.Clear();
-            NextPattern();
+            //NextPattern();
+            score = 0;
         }
     }
     
