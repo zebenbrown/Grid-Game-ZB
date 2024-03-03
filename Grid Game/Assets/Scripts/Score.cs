@@ -37,7 +37,7 @@ public class Score : MonoBehaviour
         //highScore = GetComponent<SimonSays>().highScore;
         score = PlayerPrefs.GetInt("score", 0);
         scoreText.text = "Score: " + PlayerPrefs.GetInt("score", 0).ToString();
-        highScoreText.text = "High Score:" + PlayerPrefs.GetInt("High Score", 0).ToString();
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("High Score", 0).ToString();
     }
     
     public void UpdateScoreDisplay()
