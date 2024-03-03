@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Title Screen.unity
+    guid: 97ccd2e8b24544911842f4ca70175fea
+  - enabled: 1
+    path: Assets/Scenes/Regular Difficulty.unity
+    guid: cd99596013fa04c0db3691e26f5981bb
+  - enabled: 1
+    path: Assets/Scenes/Hard Difficulty.unity
+    guid: 6b13f4f076eba9f43bc6aee8936aa72a
   m_configObjects: {}
