@@ -593,8 +593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55957e0d33e84606acc6da332ad653f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numRows: 6
-  numColumns: 7
+  numRows: 7
+  numColumns: 8
   tilePrefab: {fileID: 3339562885749419178, guid: 671d63af6b0c7419892c44bf66306754, type: 3}
   text: {fileID: 1042700350}
   padding: 0.1

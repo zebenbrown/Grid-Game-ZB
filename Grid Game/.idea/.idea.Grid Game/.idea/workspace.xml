@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="637bc644-8bdb-429d-b8c3-4565dbe9c398" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Grid Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Grid Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridTile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Hard Difficulty.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Hard Difficulty.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +100,7 @@
       <option name="presentableId" value="Default" />
       <updated>1709077652073</updated>
       <workItem from="1709077657907" duration="2606000" />
-      <workItem from="1709359686915" duration="2353000" />
+      <workItem from="1709359686915" duration="3056000" />
     </task>
     <servers />
   </component>
