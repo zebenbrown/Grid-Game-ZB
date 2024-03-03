@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,7 @@ public class SimonSays : MonoBehaviour
     [SerializeField] private GridManager gridManager;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private TextMeshProUGUI PatternPlayingText;
 
     private List<Vector2Int> correctPosition = new List<Vector2Int>();
 
@@ -54,7 +56,7 @@ public class SimonSays : MonoBehaviour
         {
             return;
         }
-
+        
         if (gridTile.gridCoordinates == correctPosition[playerPatternIndex])
         {
             Debug.Log("Correct");
@@ -92,8 +94,6 @@ public class SimonSays : MonoBehaviour
                 StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
                 correctPosition.Clear();
                 //NextPattern();
-                PlayerPrefs.SetInt("score", score);
-                PlayerPrefs.Save();
                 switchScene.LoadScene("Hard Difficulty Game Over");
             }
         }
@@ -111,6 +111,7 @@ public class SimonSays : MonoBehaviour
     private IEnumerator Co_PlayPattern(List<Vector2Int> positions)
     {
         PatternPlaying = true;
+        PatternPlayingText.text = "Wait, Pattern Playing";
         yield return new WaitForSeconds(1f);
         foreach (var pos in positions)
         {
@@ -120,6 +121,7 @@ public class SimonSays : MonoBehaviour
         }
 
         PatternPlaying = false;
+        PatternPlayingText.text = "Click The Tiles in The Correct Pattern";
     }
 
     private IEnumerator Co_FlashTile(GridTile tile, Color color, float duration)
