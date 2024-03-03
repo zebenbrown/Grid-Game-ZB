@@ -25,6 +25,7 @@ public class SimonSays : MonoBehaviour
 
     private void Awake()
     {
+        PlayerPrefs.DeleteKey("score");
         score = 0;
         scoreText.text = "Score: " + score.ToString();
         highScoreText.text = "High Score: " + PlayerPrefs.GetInt("High Score", highScore).ToString();
@@ -75,6 +76,7 @@ public class SimonSays : MonoBehaviour
             string currentScene = activeScene.name;
             if (currentScene == "Regular Difficulty")
             {
+                score = 0;
                 Debug.Log("Wrong");
                 StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
                 correctPosition.Clear();
@@ -85,6 +87,7 @@ public class SimonSays : MonoBehaviour
             
             else if (currentScene == "Hard Difficulty")
             {
+                score = 0;
                 Debug.Log("Wrong");
                 StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
                 correctPosition.Clear();
