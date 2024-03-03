@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Regular Difficulty.unity
     guid: cd99596013fa04c0db3691e26f5981bb
   - enabled: 1
+    path: Assets/Scenes/Regular Difficulty Game Over.unity
+    guid: 6dc49bc95f247c743b5bdc3500f906ab
+  - enabled: 1
     path: Assets/Scenes/Hard Difficulty.unity
     guid: 6b13f4f076eba9f43bc6aee8936aa72a
   m_configObjects: {}
