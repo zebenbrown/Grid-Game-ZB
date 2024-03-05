@@ -66,7 +66,7 @@ public class SimonSays : MonoBehaviour
             if (playerPatternIndex == correctPosition.Count)
             {
                 NextPattern();
-                scoreScript.addScore(1);
+                scoreScript.AddScore(1);
                 scoreScript.UpdateScoreDisplay();
                 
                 
