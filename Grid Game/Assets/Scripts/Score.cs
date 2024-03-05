@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Score : MonoBehaviour
 {
@@ -17,27 +18,51 @@ public class Score : MonoBehaviour
         DisplayScore();
     }
 
-    public void addScore(int scoreToAdd)
+    public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
         PlayerPrefs.SetInt("score", score);
         PlayerPrefs.Save();
-        if (score > PlayerPrefs.GetInt("High Score", 0))
+        if (SceneManager.GetActiveScene().name == "Regular Difficulty")
         {
-                    PlayerPrefs.SetInt("High Score", score);
-                    PlayerPrefs.Save();
-                    highScoreText.text = "High Score: " + score.ToString();
+            if (score > PlayerPrefs.GetInt("Regular High Score", 0))
+            {
+                PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, score);
+                PlayerPrefs.Save();
+                highScoreText.text = "High Score: " + score.ToString();
+            }
+
+            UpdateScoreDisplay();
         }
-        UpdateScoreDisplay();
+
+        if (SceneManager.GetActiveScene().name == "Hard Difficulty")
+        {
+            if (score > PlayerPrefs.GetInt("Hard High Score", 0))
+            {
+                PlayerPrefs.SetInt("Hard High Score", score);
+                PlayerPrefs.Save();
+                highScoreText.text = "High Score: " + score.ToString();
+            }
+
+            UpdateScoreDisplay();
+        }
     }
 
     public void DisplayScore()
     {
-        //score = GetComponent<SimonSays>().score;
-        //highScore = GetComponent<SimonSays>().highScore;
-        score = PlayerPrefs.GetInt("score", 0);
-        scoreText.text = "Score: " + PlayerPrefs.GetInt("score", 0).ToString();
-        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("High Score", 0).ToString();
+        if (SceneManager.GetActiveScene().name == "Regular Difficulty")
+        {
+            score = PlayerPrefs.GetInt("score", 0);
+            scoreText.text = "Score: " + PlayerPrefs.GetInt("score", 0).ToString();
+            highScoreText.text = "High Score: " + PlayerPrefs.GetInt("High Score", 0).ToString();
+        }
+
+        if (SceneManager.GetActiveScene().name == "Hard Difficulty")
+        {
+            score = PlayerPrefs.GetInt("score", 0);
+            scoreText.text = "Score: " + PlayerPrefs.GetInt("score", 0).ToString();
+            highScoreText.text = "High Score: " + PlayerPrefs.GetInt("High Score", 0).ToString();
+        }
     }
     
     public void UpdateScoreDisplay()
