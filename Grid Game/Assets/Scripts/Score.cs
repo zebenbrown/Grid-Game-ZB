@@ -23,9 +23,8 @@ public class Score : MonoBehaviour
         score += scoreToAdd;
         PlayerPrefs.SetInt("score", score);
         PlayerPrefs.Save();
-        if (SceneManager.GetActiveScene().name == "Regular Difficulty")
-        {
-            if (score > PlayerPrefs.GetInt("Regular High Score", 0))
+        
+            if (score > PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0))
             {
                 PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, score);
                 PlayerPrefs.Save();
@@ -33,36 +32,14 @@ public class Score : MonoBehaviour
             }
 
             UpdateScoreDisplay();
-        }
-
-        if (SceneManager.GetActiveScene().name == "Hard Difficulty")
-        {
-            if (score > PlayerPrefs.GetInt("Hard High Score", 0))
-            {
-                PlayerPrefs.SetInt("Hard High Score", score);
-                PlayerPrefs.Save();
-                highScoreText.text = "High Score: " + score.ToString();
-            }
-
-            UpdateScoreDisplay();
-        }
     }
 
     public void DisplayScore()
     {
-        if (SceneManager.GetActiveScene().name == "Regular Difficulty")
-        {
-            score = PlayerPrefs.GetInt("score", 0);
-            scoreText.text = "Score: " + PlayerPrefs.GetInt("score", 0).ToString();
-            highScoreText.text = "High Score: " + PlayerPrefs.GetInt("High Score", 0).ToString();
-        }
-
-        if (SceneManager.GetActiveScene().name == "Hard Difficulty")
-        {
-            score = PlayerPrefs.GetInt("score", 0);
-            scoreText.text = "Score: " + PlayerPrefs.GetInt("score", 0).ToString();
-            highScoreText.text = "High Score: " + PlayerPrefs.GetInt("High Score", 0).ToString();
-        }
+        score = PlayerPrefs.GetInt("score", 0);
+        scoreText.text = "Score: " + PlayerPrefs.GetInt("score", 0).ToString(); 
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt(SceneManager.GetActiveScene().name, 0).ToString();
+        
     }
     
     public void UpdateScoreDisplay()
