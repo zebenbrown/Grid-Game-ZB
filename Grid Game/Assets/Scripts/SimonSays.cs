@@ -74,9 +74,7 @@ public class SimonSays : MonoBehaviour
         }
         else
         {
-            Scene activeScene = SceneManager.GetActiveScene();
-            string currentScene = activeScene.name;
-            if (currentScene == "Regular Difficulty")
+            if (SceneManager.GetActiveScene().name == "Regular Difficulty")
             {
                 score = 0;
                 Debug.Log("Wrong");
@@ -87,7 +85,7 @@ public class SimonSays : MonoBehaviour
                 
             }
             
-            else if (currentScene == "Hard Difficulty")
+            else if (SceneManager.GetActiveScene().name == "Hard Difficulty")
             {
                 score = 0;
                 Debug.Log("Wrong");
