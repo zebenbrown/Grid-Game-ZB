@@ -5,6 +5,7 @@ using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.WSA;
 using Random = UnityEngine.Random;
 
 public class SimonSays : MonoBehaviour
@@ -20,7 +21,8 @@ public class SimonSays : MonoBehaviour
     private List<Vector2Int> correctPosition = new List<Vector2Int>();
 
     private bool PatternPlaying;
-    private int playerPatternIndex;
+    private static int playerPatternIndex = 0;
+    private static int redFlashCheck = 0;
     public int score;
     public int highScore;
 
@@ -57,21 +59,25 @@ public class SimonSays : MonoBehaviour
             return;
         }
         
-        if (gridTile.gridCoordinates == correctPosition[playerPatternIndex])
+        if (playerPatternIndex < correctPosition.Count && gridTile.gridCoordinates == correctPosition[playerPatternIndex])
         {
+            int randomRed = 3;
             Debug.Log("Correct");
-            //scoreText.text = "Score: " + score.ToString();
-            StartCoroutine(Co_FlashTile(gridTile, Color.green, 0.25f));
+            if (playerPatternIndex > 0)
+            {
+                randomRed = Random.Range(0, playerPatternIndex + 1);
+                Debug.Log(randomRed);
+            }
+            StartCoroutine(Co_FlashSequence(gridTile, randomRed, 0.25f));
             playerPatternIndex++;
             if (playerPatternIndex == correctPosition.Count)
             {
                 NextPattern();
                 scoreScript.AddScore(1);
                 scoreScript.UpdateScoreDisplay();
-                
-                
             }
         }
+
         else
         {
             if (SceneManager.GetActiveScene().name == "Regular Difficulty")
@@ -80,7 +86,6 @@ public class SimonSays : MonoBehaviour
                 Debug.Log("Wrong");
                 StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
                 correctPosition.Clear();
-                //NextPattern();
                 switchScene.LoadScene("Regular Difficulty Game Over");
                 
             }
@@ -91,36 +96,42 @@ public class SimonSays : MonoBehaviour
                 Debug.Log("Wrong");
                 StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
                 correctPosition.Clear();
-                //NextPattern();
                 switchScene.LoadScene("Hard Difficulty Game Over");
             }
+
+            playerPatternIndex = 0;
         }
     }
     
     [ContextMenu("Next Pattern")]
     public void NextPattern()
     {
-        score = 0;
         playerPatternIndex = 0;
+        score = 0;
         correctPosition.Add(new Vector2Int(Random.Range(0, gridManager.numColumns), Random.Range(0, gridManager.numRows)));
         StartCoroutine(Co_PlayPattern(correctPosition));
     }
-
+    
     private IEnumerator Co_PlayPattern(List<Vector2Int> positions)
     {
         PatternPlaying = true;
         PatternPlayingText.text = "Wait, Pattern Playing";
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
         foreach (var pos in positions)
         {
             GridTile tile = gridManager.GetTile(pos);
-            yield return Co_FlashTile(tile, Color.red, 0.25f);
+
+            int randomRed = 3;
+            yield return Co_FlashSequence(tile, randomRed, 0.25f);
             yield return new WaitForSeconds(0.5f);
+            
         }
 
         PatternPlaying = false;
         PatternPlayingText.text = "Click The Tiles in The Correct Pattern";
     }
+    
+    
 
     private IEnumerator Co_FlashTile(GridTile tile, Color color, float duration)
     {
@@ -128,4 +139,68 @@ public class SimonSays : MonoBehaviour
         yield return new WaitForSeconds(duration);
         tile.ResetColor();
     }
+    
+    private IEnumerator Co_FlashSequence(GridTile tile, int randomRed, float duration)
+    {
+    
+        for (int i = redFlashCheck; i < playerPatternIndex + 1; i++)
+        {
+            if (i == randomRed)
+            {
+                yield return Co_FlashTile(tile, Color.red, 0.25f);
+            }
+            else
+            {
+                yield return Co_FlashTile(tile, Color.green, 0.25f);
+            }
+        }
+        
+        redFlashCheck = playerPatternIndex; // Update redFlashCheck for the next sequence
+    }
 }
+
+
+    
+    // private IEnumerator Co_FlashSequence(GridTile tile, int randomRed, float duration)
+    // {
+    //
+    //     for (int i = redFlashCheck; i < playerPatternIndex + 1; redFlashCheck++)
+    //     {
+    //         
+    //         if (i == randomRed)
+    //         {
+    //             tile.SetColor(Color.red);
+    //             Debug.Log(playerPatternIndex);
+    //         }
+    //         else
+    //         {
+    //             tile.SetColor(Color.green);
+    //             Debug.Log(playerPatternIndex);
+    //                 
+    //         }
+    //     }
+    //
+    //     yield return new WaitForSeconds(duration);
+    //     tile.ResetColor();
+    //     yield return new WaitForSeconds(duration);
+    // }
+    
+    
+    // private IEnumerator Co_FlashSequence(GridTile tile, int randomRed, float duration)
+    // {
+    //     tile.ResetColor(); // Reset color before starting sequence
+    //
+    //     for (int i = 0; i < playerPatternIndex + 1; i++)
+    //     {
+    //         if (i == randomRed)
+    //         {
+    //             tile.SetColor(Color.red);
+    //         }
+    //         else
+    //         {
+    //             tile.SetColor(Color.green);
+    //         }
+    //         yield return new WaitForSeconds(duration);
+    //         tile.ResetColor(); // Reset color after each flash
+    //         yield return new WaitForSeconds(0.1f); // Add a small delay between flashes
+    //     }
