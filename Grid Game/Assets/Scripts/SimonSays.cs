@@ -61,6 +61,51 @@ public class SimonSays : MonoBehaviour
         
         if (playerPatternIndex < correctPosition.Count && gridTile.gridCoordinates == correctPosition[playerPatternIndex])
         {
+            
+            StartCoroutine(Co_FlashTile(gridTile, Color.green, 0.25f));
+            playerPatternIndex++;   
+            if (playerPatternIndex == correctPosition.Count)
+            {
+                NextPattern();
+                scoreScript.AddScore(1);
+                scoreScript.UpdateScoreDisplay();
+            }
+        }
+
+        else
+        {
+            if (SceneManager.GetActiveScene().name == "Regular Difficulty")
+            {
+                score = 0;
+                Debug.Log("Wrong");
+                StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
+                correctPosition.Clear();
+                switchScene.LoadScene("Regular Difficulty Game Over");
+                
+            }
+            
+            else if (SceneManager.GetActiveScene().name == "Hard Difficulty")
+            {
+                score = 0;
+                Debug.Log("Wrong");
+                StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
+                correctPosition.Clear();
+                switchScene.LoadScene("Hard Difficulty Game Over");
+            }
+
+            playerPatternIndex = 0;
+        }
+    }
+    
+    /*private void OnTileSelected(GridTile gridTile)
+    {
+        if (PatternPlaying)
+        {
+            return;
+        }
+        
+        if (playerPatternIndex < correctPosition.Count && gridTile.gridCoordinates == correctPosition[playerPatternIndex])
+        {
             int randomRed = 3;
             Debug.Log("Correct");
             if (playerPatternIndex > 0)
@@ -101,7 +146,7 @@ public class SimonSays : MonoBehaviour
 
             playerPatternIndex = 0;
         }
-    }
+    }*/
     
     [ContextMenu("Next Pattern")]
     public void NextPattern()
@@ -116,12 +161,18 @@ public class SimonSays : MonoBehaviour
     {
         PatternPlaying = true;
         PatternPlayingText.text = "Wait, Pattern Playing";
-        //yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
         foreach (var pos in positions)
         {
+             int randomRed = 3; 
+            if (playerPatternIndex > 0)
+            {
+                randomRed = Random.Range(0, playerPatternIndex + 1);
+                Debug.Log(randomRed);
+            }
             GridTile tile = gridManager.GetTile(pos);
 
-            int randomRed = 3;
+          
             yield return Co_FlashSequence(tile, randomRed, 0.25f);
             yield return new WaitForSeconds(0.5f);
             
