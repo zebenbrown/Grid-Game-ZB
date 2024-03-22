@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,11 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private GridTile tilePrefab;
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private float DoJumpX = -3.6f;
+    [SerializeField] private float DoJumpY = -3.95f;
+    [SerializeField] private float DoJumpPower = 5f;
+    [SerializeField] private float DoJumpDuration = 3f;
+    [SerializeField] private float FadeDuration = 1f;
     private GridTile[] tiles;
 
     public float padding = 0.1f;
@@ -31,13 +37,24 @@ public class GridManager : MonoBehaviour
         {
             for (int x = 0; x < numColumns; x++)
             {
+                DOTween.Init();
+                
                 GridTile tile = Instantiate(tilePrefab, transform);
+                
                 Vector2 tilePos = new Vector2(x + (padding * x), y + (padding * y));
                 tile.transform.localPosition = tilePos;
                 tile.name = $"Tile_{x}_{y}";
                 tile.gridManager = this;
                 tile.gridCoordinates = new Vector2Int(x, y);
                 tiles[y * numColumns + x] = tile;
+                
+                SpriteRenderer spriteRenderer = tile.GetComponent<SpriteRenderer>();
+                Color c = spriteRenderer.color;
+                c.a = 0f;
+                spriteRenderer.color = c;
+
+                // Fade in the tile
+                spriteRenderer.DOFade(1f, FadeDuration);
             }
         }
     }

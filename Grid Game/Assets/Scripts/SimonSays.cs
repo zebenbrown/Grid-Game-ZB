@@ -5,7 +5,7 @@ using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.WSA;
+//using UnityEngine.WSA;
 using Random = UnityEngine.Random;
 
 public class SimonSays : MonoBehaviour
@@ -164,7 +164,7 @@ public class SimonSays : MonoBehaviour
         yield return new WaitForSeconds(1f);
         foreach (var pos in positions)
         {
-             int randomRed = 3; 
+            int randomRed = 3; 
             if (playerPatternIndex > 0)
             {
                 randomRed = Random.Range(0, playerPatternIndex + 1);
