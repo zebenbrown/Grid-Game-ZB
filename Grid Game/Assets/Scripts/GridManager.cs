@@ -19,16 +19,18 @@ public class GridManager : MonoBehaviour
     //[SerializeField] private float DoJumpY = -3.95f;
     //[SerializeField] private float DoJumpPower = 5f;
     //[SerializeField] private float DoJumpDuration = 3f;
-    //[SerializeField] private float FadeDuration;
+    [SerializeField] private float FadeInDuration;
     
     private GridTile[] tiles;
+    private FadeScript fadeScript;
     public float padding = 0.1f;
-
+    public CanvasGroup canvasGroup;
     private void Awake()
     {
-        InitializeGrid();
-        GetComponent<FadeScript>();
         DOTween.Init();
+        CanvasFadeIn();
+        InitializeGrid();
+        
     }
 
     public void InitializeGrid()
@@ -55,7 +57,7 @@ public class GridManager : MonoBehaviour
                 spriteRenderer.color = c;
 
                 // Fade in the tile
-                spriteRenderer.DOFade(1f, 1.5f);
+                spriteRenderer.DOFade(1f, FadeInDuration);
             }
         }
     }
@@ -93,8 +95,15 @@ public class GridManager : MonoBehaviour
             SpriteRenderer spriteRenderer = tile.GetComponent<SpriteRenderer>();
             Color c = spriteRenderer.color;
             c.a = 1f;
-            spriteRenderer.color = c;
+            spriteRenderer.color = Color.red;
             spriteRenderer.DOFade(0, 1.5f);
         }
     }
+
+    void CanvasFadeIn()
+    {
+        canvasGroup.alpha = 0f;
+        canvasGroup.DOFade(1, FadeInDuration);
+    }
+    
 }

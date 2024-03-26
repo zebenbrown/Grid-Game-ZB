@@ -857,6 +857,7 @@ MonoBehaviour:
   scoreText: {fileID: 1139036604}
   highScoreText: {fileID: 1530899200}
   PatternPlayingText: {fileID: 1741081115}
+  WrongTileText: {fileID: 0}
   score: 0
   highScore: 0
 --- !u!114 &1332590797
@@ -984,6 +985,7 @@ MonoBehaviour:
   startButtonFade: {fileID: 1332590797}
   background: {fileID: 509448368}
   FadeDuration: 1.5
+  canvasGroup: {fileID: 954311077}
   tile: {fileID: 3339562885749419178, guid: 671d63af6b0c7419892c44bf66306754, type: 3}
 --- !u!1 &1482038581
 GameObject:
@@ -1111,7 +1113,9 @@ MonoBehaviour:
   numColumns: 7
   tilePrefab: {fileID: 3339562885749419178, guid: 671d63af6b0c7419892c44bf66306754, type: 3}
   text: {fileID: 1042700350}
+  FadeInDuration: 2
   padding: 0.1
+  canvasGroup: {fileID: 954311077}
 --- !u!4 &1490186671
 Transform:
   m_ObjectHideFlags: 0

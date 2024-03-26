@@ -13,12 +13,21 @@ public class SwitchScene : MonoBehaviour
     }
     public void LoadScene(string sceneName)
     {
+        //Fade out the canvas items in the regular difficulty game over scene
         if (SceneManager.GetActiveScene().name == "Regular Difficulty Game Over")
         {
             gameOver.FadeOut();
             StartCoroutine(Co_WaitLoadScene(sceneName)); 
             return;
         }
+        
+        //Fade out the canvas items in the hard difficulty game over scene
+        if (SceneManager.GetActiveScene().name == "Hard Difficulty Game Over")
+        {
+            gameOver.FadeOut();
+            StartCoroutine(Co_WaitLoadScene(sceneName));
+            return;
+        } 
         SceneManager.LoadScene(sceneName);
     }
 

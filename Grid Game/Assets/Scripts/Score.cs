@@ -70,4 +70,5 @@ public class Score : MonoBehaviour
         PlayerPrefs.GetInt("score", score);
 
     }
+    
 }

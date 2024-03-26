@@ -17,29 +17,28 @@ public class FadeScript : MonoBehaviour
     [SerializeField] private float FadeDuration;
 
     private Image buttonImage;
-    private CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
     public GridTile tile; 
 
     private Color c;
 
-    private void Start()
+
+    private void Awake()
     {
-        canvasGroup = GetComponentInParent<CanvasGroup>();
-        tile = GetComponent<GridTile>();
+        canvasGroup.alpha = 0f;
         if (canvasGroup == null)
         {
             Debug.Log("canvasGroup is null");
         }
     }
-
-    public void BackgroundFade()
+    private void Start()
     {
-        background.DOFade(0, FadeDuration).OnComplete(() =>
-        {
-            c = background.color;
-            c.a = 0f;
-            background.color = c;
-        });    
+        tile = GetComponent<GridTile>();
+    }
+
+    public void CanvasFadeIn()
+    {
+        canvasGroup.DOFade(1, FadeDuration);
     }
     
     public void CanvasFade()

@@ -1295,6 +1295,7 @@ MonoBehaviour:
   startButtonFade: {fileID: 0}
   background: {fileID: 0}
   FadeDuration: 1.5
+  canvasGroup: {fileID: 778927280}
   tile: {fileID: 0}
 --- !u!1 &1887064299
 GameObject:
@@ -1377,6 +1378,7 @@ GameObject:
   - component: {fileID: 1960177785}
   - component: {fileID: 1960177784}
   - component: {fileID: 1960177787}
+  - component: {fileID: 1960177788}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -1510,6 +1512,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a64288d4e4446eb8ef11a7fdcd8791, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1960177788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960177782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca8ece6827c643b3bbf9cb7b08d3ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeDuration: 1.5
+  canvasGroup: {fileID: 778927280}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

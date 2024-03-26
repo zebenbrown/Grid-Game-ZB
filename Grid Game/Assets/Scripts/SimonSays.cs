@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,7 @@ public class SimonSays : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
     [SerializeField] private TextMeshProUGUI PatternPlayingText;
+    [SerializeField] private TextMeshProUGUI WrongTileText;
 
     private List<Vector2Int> correctPosition = new List<Vector2Int>();
 
@@ -84,24 +86,27 @@ public class SimonSays : MonoBehaviour
 
         else
         {
+            //If wrong tile is clicked in the regular difficulty
             if (SceneManager.GetActiveScene().name == "Regular Difficulty")
             {
                 score = 0;
                 Debug.Log("Wrong");
-                StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
+                StartCoroutine(Co_FlashTile(gridTile, Color.red, 3f));
                 correctPosition.Clear();
                 fadeScript.CanvasFade();
                 gridManager.GridFade();
                 StartCoroutine(Co_WaitRegularDifficulty());
             }
             
+            //if the wrong tile is clicked in the hard difficulty
             else if (SceneManager.GetActiveScene().name == "Hard Difficulty")
             {
                 score = 0;
                 Debug.Log("Wrong");
-                StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
+                StartCoroutine(Co_FlashTile(gridTile, Color.red, 3f));
                 correctPosition.Clear();
                 fadeScript.CanvasFade();
+                gridManager.GridFade();
                 StartCoroutine(Co_WaitHardDifficulty());
                
             }
@@ -204,6 +209,7 @@ public class SimonSays : MonoBehaviour
         tile.SetColor(Color.white);
     }
     
+    //My attempt for random red
     private IEnumerator Co_FlashSequence(GridTile tile, int randomRed, float duration)
     {
     
@@ -221,18 +227,20 @@ public class SimonSays : MonoBehaviour
         
         redFlashCheck = playerPatternIndex; // Update redFlashCheck for the next sequence
     }
+    
+    //Coroutine to allow canvas items time to fade
     IEnumerator Co_WaitRegularDifficulty()
     {
-        yield return new WaitForSeconds(1.6f);
+        yield return new WaitForSeconds(1.8f);
         switchScene.LoadScene("Regular Difficulty Game Over");
     }
     
+    //Coroutine to allow canvas items time to fade
     IEnumerator Co_WaitHardDifficulty()
     {
         yield return new WaitForSeconds(1.6f);
         switchScene.LoadScene("Hard Difficulty Game Over");
     }
-    
 }
 
 

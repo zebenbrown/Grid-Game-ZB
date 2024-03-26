@@ -916,6 +916,7 @@ GameObject:
   - component: {fileID: 781239547}
   - component: {fileID: 781239546}
   - component: {fileID: 781239545}
+  - component: {fileID: 781239549}
   m_Layer: 5
   m_Name: Exit Game Button
   m_TagString: Untagged
@@ -1049,6 +1050,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781239543}
   m_CullTransparentMesh: 1
+--- !u!114 &781239549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781239543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca8ece6827c643b3bbf9cb7b08d3ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeDuration: 1.5
+  canvasGroup: {fileID: 1418905615}
 --- !u!1 &1112681261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,7 +1098,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 5, y: -151}
+  m_AnchoredPosition: {x: 5, y: -325}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1112681263
