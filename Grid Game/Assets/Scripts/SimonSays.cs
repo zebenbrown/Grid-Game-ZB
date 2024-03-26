@@ -10,9 +10,9 @@ using Random = UnityEngine.Random;
 
 public class SimonSays : MonoBehaviour
 {
+    public FadeScript fadeScript;
     public SwitchScene switchScene;
     public Score scoreScript;
-
     [SerializeField] private GridManager gridManager;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
@@ -25,6 +25,7 @@ public class SimonSays : MonoBehaviour
     private static int redFlashCheck = 0;
     public int score;
     public int highScore;
+    
 
 
     private void Awake()
@@ -35,7 +36,16 @@ public class SimonSays : MonoBehaviour
         highScoreText.text = "High Score: " + PlayerPrefs.GetInt("High Score", highScore).ToString();
 
     }
-    
+    private void Start()
+    {
+        
+        fadeScript = GetComponent<FadeScript>();
+        if (fadeScript == null)
+        {
+            Debug.Log("FadeScript not found");
+        }
+    }
+
     private void Update()
     {
         scoreText.text = "Score: " + score.ToString();
@@ -80,8 +90,9 @@ public class SimonSays : MonoBehaviour
                 Debug.Log("Wrong");
                 StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
                 correctPosition.Clear();
-                switchScene.LoadScene("Regular Difficulty Game Over");
-                
+                fadeScript.CanvasFade();
+                gridManager.GridFade();
+                StartCoroutine(Co_WaitRegularDifficulty());
             }
             
             else if (SceneManager.GetActiveScene().name == "Hard Difficulty")
@@ -90,7 +101,9 @@ public class SimonSays : MonoBehaviour
                 Debug.Log("Wrong");
                 StartCoroutine(Co_FlashTile(gridTile, Color.red, 0.25f));
                 correctPosition.Clear();
-                switchScene.LoadScene("Hard Difficulty Game Over");
+                fadeScript.CanvasFade();
+                StartCoroutine(Co_WaitHardDifficulty());
+               
             }
 
             playerPatternIndex = 0;
@@ -173,7 +186,7 @@ public class SimonSays : MonoBehaviour
             GridTile tile = gridManager.GetTile(pos);
 
           
-            yield return Co_FlashSequence(tile, randomRed, 0.25f);
+            yield return Co_FlashTile(tile, Color.green, 0.25f);
             yield return new WaitForSeconds(0.5f);
             
         }
@@ -188,7 +201,7 @@ public class SimonSays : MonoBehaviour
     {
         tile.SetColor(color);
         yield return new WaitForSeconds(duration);
-        tile.ResetColor();
+        tile.SetColor(Color.white);
     }
     
     private IEnumerator Co_FlashSequence(GridTile tile, int randomRed, float duration)
@@ -208,6 +221,18 @@ public class SimonSays : MonoBehaviour
         
         redFlashCheck = playerPatternIndex; // Update redFlashCheck for the next sequence
     }
+    IEnumerator Co_WaitRegularDifficulty()
+    {
+        yield return new WaitForSeconds(1.6f);
+        switchScene.LoadScene("Regular Difficulty Game Over");
+    }
+    
+    IEnumerator Co_WaitHardDifficulty()
+    {
+        yield return new WaitForSeconds(1.6f);
+        switchScene.LoadScene("Hard Difficulty Game Over");
+    }
+    
 }
 
 
@@ -255,3 +280,5 @@ public class SimonSays : MonoBehaviour
     //         tile.ResetColor(); // Reset color after each flash
     //         yield return new WaitForSeconds(0.1f); // Add a small delay between flashes
     //     }
+
+    

@@ -15,18 +15,20 @@ public class GridManager : MonoBehaviour
 
     [SerializeField] private GridTile tilePrefab;
     [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private float DoJumpX = -3.6f;
-    [SerializeField] private float DoJumpY = -3.95f;
-    [SerializeField] private float DoJumpPower = 5f;
-    [SerializeField] private float DoJumpDuration = 3f;
-    [SerializeField] private float FadeDuration = 1f;
+    //[SerializeField] private float DoJumpX = -3.6f;
+    //[SerializeField] private float DoJumpY = -3.95f;
+    //[SerializeField] private float DoJumpPower = 5f;
+    //[SerializeField] private float DoJumpDuration = 3f;
+    //[SerializeField] private float FadeDuration;
+    
     private GridTile[] tiles;
-
     public float padding = 0.1f;
 
     private void Awake()
     {
         InitializeGrid();
+        GetComponent<FadeScript>();
+        DOTween.Init();
     }
 
     public void InitializeGrid()
@@ -37,7 +39,6 @@ public class GridManager : MonoBehaviour
         {
             for (int x = 0; x < numColumns; x++)
             {
-                DOTween.Init();
                 
                 GridTile tile = Instantiate(tilePrefab, transform);
                 
@@ -54,7 +55,7 @@ public class GridManager : MonoBehaviour
                 spriteRenderer.color = c;
 
                 // Fade in the tile
-                spriteRenderer.DOFade(1f, FadeDuration);
+                spriteRenderer.DOFade(1f, 1.5f);
             }
         }
     }
@@ -83,5 +84,17 @@ public class GridManager : MonoBehaviour
             return null;
         }
         return tiles[pos.y * numColumns + pos.x];
+    }
+
+    public void GridFade()
+    {
+        foreach (GridTile tile in tiles)
+        {
+            SpriteRenderer spriteRenderer = tile.GetComponent<SpriteRenderer>();
+            Color c = spriteRenderer.color;
+            c.a = 1f;
+            spriteRenderer.color = c;
+            spriteRenderer.DOFade(0, 1.5f);
+        }
     }
 }

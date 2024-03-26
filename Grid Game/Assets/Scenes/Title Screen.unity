@@ -499,6 +499,8 @@ GameObject:
   - component: {fileID: 778927277}
   - component: {fileID: 778927276}
   - component: {fileID: 778927275}
+  - component: {fileID: 778927280}
+  - component: {fileID: 778927279}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -592,6 +594,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &778927279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778927274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca8ece6827c643b3bbf9cb7b08d3ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeDuration: 1.2
+  canvasGroup: {fileID: 778927280}
+--- !u!225 &778927280
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778927274}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &783799149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,6 +1150,7 @@ GameObject:
   - component: {fileID: 1587715278}
   - component: {fileID: 1587715280}
   - component: {fileID: 1587715279}
+  - component: {fileID: 1587715281}
   m_Layer: 5
   m_Name: Title Text
   m_TagString: Untagged
@@ -1247,6 +1276,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1587715277}
   m_CullTransparentMesh: 1
+--- !u!114 &1587715281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587715277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f5c3b8f8c0134904a690c330db84bd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreFade: {fileID: 0}
+  highScoreFade: {fileID: 0}
+  coordinatesFade: {fileID: 0}
+  patternPlayingFade: {fileID: 0}
+  startButtonFade: {fileID: 0}
+  background: {fileID: 0}
+  FadeDuration: 1.5
+  tile: {fileID: 0}
 --- !u!1 &1887064299
 GameObject:
   m_ObjectHideFlags: 0
